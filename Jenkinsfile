@@ -13,7 +13,7 @@ pipeline {
         AWS_EB_ENVIRONMENT = "Testp2-env"
 
         SONAR_IP = "52.23.193.18"
-        SONAR_TOKEN = "sqa_2e38c376060d2dc80437a74a7642ba7cf90045ed"
+        SONAR_TOKEN = "sqp_375a0552b08ba037d07ab9858500bc40fe78b8f6"
 
     }
 
@@ -55,9 +55,9 @@ pipeline {
                 sh '''
 
                 mvn clean verify sonar:sonar \
-                    -Dsonar.projectKey=Online-cohort-project \
-                    -Dsonar.host.url=http://$SONAR_IP \
-                    -Dsonar.login=$SONAR_TOKEN
+                    -Dsonar.projectKey=onsite-M.ALGOW-B2D2 \
+                    -Dsonar.host.url=http://52.23.193.18 \
+                    -Dsonar.login=sqp_375a0552b08ba037d07ab9858500bc40fe78b8f6
 
                 '''
             }
