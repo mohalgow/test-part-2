@@ -63,17 +63,7 @@ pipeline {
             }
         }
 
-        stage('Package') {
-            steps {
-            }
-            post {
-                success {
-                    
-
-                  
-                }
-            }
-        }
+       
 
         stage('Publish artefacts to S3 Bucket') {
             steps {
