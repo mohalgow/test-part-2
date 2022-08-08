@@ -8,9 +8,9 @@ pipeline {
 
         AWS_S3_BUCKET = "m.algow-belt2d2-artifacts-123456"
         ARTIFACT_NAME = "up.jar"
-        AWS_EB_APP_NAME = "test-p2"
+        AWS_EB_APP_NAME = "algow"
         AWS_EB_APP_VERSION = "${BUILD_ID}"
-        AWS_EB_ENVIRONMENT = "Testp2-env"
+        AWS_EB_ENVIRONMENT = "Algow-env"
 
         SONAR_IP = "52.23.193.18"
         SONAR_TOKEN = "sqp_375a0552b08ba037d07ab9858500bc40fe78b8f6"
