@@ -7,7 +7,7 @@ pipeline {
         AWS_SECRET_ACCESS_KEY = credentials('m.algow-aws-secret-access-key')
 
         AWS_S3_BUCKET = "m.algow-belt2d2-artifacts-123456"
-        ARTIFACT_NAME = "hello-world.war"
+        ARTIFACT_NAME = "up.jar"
         AWS_EB_APP_NAME = "test-p2"
         AWS_EB_APP_VERSION = "${BUILD_ID}"
         AWS_EB_ENVIRONMENT = "Testp2-env"
@@ -53,17 +53,40 @@ pipeline {
         stage('Quality Scan'){
             steps {
                 sh '''
-
                 mvn clean verify sonar:sonar \
                     -Dsonar.projectKey=onsite-M.ALGOW-B2D2 \
                     -Dsonar.host.url=http://52.23.193.18 \
                     -Dsonar.login=sqp_375a0552b08ba037d07ab9858500bc40fe78b8f6
-
                 '''
             }
         }
 
-    
+        stage('Package') {
+            steps {
+                
+                sh "mvn package"
+
+            }
+
+            post {
+                success {
+                    archiveArtifacts artifacts: '**/target/**.jar', followSymlinks: false
+
+                   
+                }
+            }
+        }
+
+        stage('Publish artefacts to S3 Bucket') {
+            steps {
+
+                sh "aws configure set region us-east-1"
+
+                sh "aws s3 cp ./target/**.jar s3://$AWS_S3_BUCKET/$ARTIFACT_NAME"
+                
+            }
+        }
+
         stage('Deploy') {
             steps {
 
